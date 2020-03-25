@@ -41,8 +41,8 @@ class Inicio extends Component {
                   <View5 />
                 ) : null}
                 <br />
-                <Navegador handleNavigation={this.setIndex} maxIndex={4} />
               </CardBody>
+              <Navegador handleNavigation={this.setIndex} maxIndex={4} />
             </Card>
           </Col>
         </Row>
