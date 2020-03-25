@@ -1,35 +1,47 @@
-import React, { Component } from 'react';
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Col,
-  Row
-} from 'reactstrap';
-import logo from '../assets/img/brand/logo.png'
-import withAuth from '../services/withAuth';
-//import { connect } from 'react-redux';
-//import { addProfile, setCampaign, darkTheme,setAvatar } from '../../Redux/Actions/profile';
+import React, { Component } from "react";
+import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
 
+import withAuth from "../services/withAuth";
+import Navegador from "./componentes/Navegador";
+import View1 from "./View1";
+import View2 from "./View2";
+import { View3, View4, View5 } from "./View3_5";
 class Inicio extends Component {
+  state = {
+    index: 0
+  };
+  constructor() {
+    super();
+    this.setIndex = this.setIndex.bind(this);
+  }
 
-
-  
-  loading = () => <div className="animated fadeIn pt-1 text-center">Cargando...</div>
+  setIndex(index) {
+    this.setState({
+      index: index
+    });
+  }
 
   render() {
-
     return (
       <div className="animated fadeIn">
-
         <Row>
           <Col>
             <Card>
-              <CardHeader className="text-center">
-                ¡Bienvenido! 
-              </CardHeader>
+              <CardHeader className="text-center">¡Bienvenido!</CardHeader>
               <CardBody className="text-center">
-              <img src={logo}  alt="Logo CCS" className="img-fluid"/>
+                {this.state.index === 0 ? (
+                  <View1 />
+                ) : this.state.index === 1 ? (
+                  <View2 />
+                ) : this.state.index === 2 ? (
+                  <View3 />
+                ) : this.state.index === 3 ? (
+                  <View4 />
+                ) : this.state.index === 4 ? (
+                  <View5 />
+                ) : null}
+                <br />
+                <Navegador handleNavigation={this.setIndex} maxIndex={4} />
               </CardBody>
             </Card>
           </Col>
@@ -39,34 +51,4 @@ class Inicio extends Component {
   }
 }
 
-
-// const mapStateToProps = state => {
-//   return {
-//     profile: state.profile.profile,
-//     campaign: state.campaign.campaign,
-//     darkTheme: state.darkTheme.darkTheme
-//   }
-// }
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     addProfile: (name) => {
-//       dispatch(addProfile(name))
-//     },
-//     setCampaign: (id) => {
-//       dispatch(setCampaign(id))
-//     },
-//     darkTheme: (isDarkTheme) => {
-//       dispatch(darkTheme(isDarkTheme))
-//     },
-//     setAvatar: (data) => {
-//       dispatch(setAvatar(data))
-//     }
-
-//   }
-// }
-
-
-//export default connect(mapStateToProps, mapDispatchToProps)(withAuth(Inicio));
-export default withAuth(Inicio)
-
+export default withAuth(Inicio);
